@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
-import Stats from './pages/Stats';
+import {Stats} from './pages/Stats';
+import { Favorites } from './pages/Favorites';
 import { AnimatePresence } from 'framer-motion';
 
 const AnimatedRoutes = () => {
@@ -11,6 +12,7 @@ const AnimatedRoutes = () => {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
         <Route path="/stats" element={<Stats />} />
+        <Route path="/favorites" element={<Favorites />} />
       </Routes>
     </AnimatePresence>
   );

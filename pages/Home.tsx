@@ -1,26 +1,87 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { User, Heart, X, RotateCcw, BarChart2 } from 'lucide-react';
 import SwipeCard from '../components/SwipeCard';
-import { haikuList, HAIKUS } from '../data';
+import { haikuList } from '../data';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useHaikuStats } from '../hooks/useHaikuStats';
 
-const Home: React.FC = () => {
+// Assuming Haiku type is defined elsewhere or inferred from HAIKUS
+interface Haiku {
+  id: number;
+  text: string[];
+  author: string;
+}
+
+const FloatingHeart = ({ id, onComplete }: { id: number; onComplete: (id: number) => void }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 1, y: 0, scale: 0.5 }}
+      animate={{ opacity: 0, y: -100, scale: 1.5 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      onAnimationComplete={() => onComplete(id)}
+      className="absolute pointer-events-none text-red-500 z-50"
+      style={{ bottom: '80px', right: '40px' }} // Adjust position relative to the button
+    >
+      <Heart size={32} fill="currentColor" />
+    </motion.div>
+  );
+};
+
+export const Home = () => {
   const navigate = useNavigate();
-  const [cards, setCards] = useState(HAIKUS);
-  const [history, setHistory] = useState<string[]>([]);
+  const [cards, setCards] = useState<Haiku[]>([]);
+  const [history, setHistory] = useState<Haiku[]>([]);
   const [swipeDirection, setSwipeDirection] = useState<'left' | 'right' | null>(null);
+  const { recordAction } = useHaikuStats();
+  const [hearts, setHearts] = useState<number[]>([]);
+
+  // Shuffle and load cards on mount
+  useEffect(() => {
+    const filtered = haikuList.filter(h => {
+      const lines = h.japanese.split('\\n');
+      return h.japanese.length >= 8 && lines.length >= 3;
+    });
+    const shuffled = [...filtered].sort(() => Math.random() - 0.5);
+    setCards(shuffled);
+  }, []);
 
   // We artificially limit cards to show stack effect without rendering everything
   const activeCards = cards.slice(0, 2);
 
-  const handleSwipe = (id: string, direction: 'left' | 'right') => {
-    setSwipeDirection(direction);
+  const removeCard = (id: number, action: 'left' | 'right') => {
+    setCards((prev) => prev.filter((card) => card.id !== id));
+    if (action === 'right') {
+      console.log('Liked haiku:', id);
+    } else {
+      console.log('Disliked haiku:', id);
+    }
+  };
+
+  const addHeart = () => {
+    setHearts((prev) => [...prev, Date.now()]);
+  };
+
+  const removeHeart = (id: number) => {
+    setHearts((prev) => prev.filter((h) => h !== id));
+  };
+
+  const handleSwipe = (id: number, dir: 'left' | 'right') => {
+    setSwipeDirection(dir);
     
+    if (dir === 'right') {
+      addHeart();
+    }
+
     // Allow animation to play
     setTimeout(() => {
-        setCards(prev => prev.filter(c => c.id !== id));
-        setHistory(prev => [...prev, id]);
+        const card = cards.find(c => c.id === id);
+        if (card) {
+            const action = dir === 'right' ? 'like' : 'dislike';
+            recordAction(card.id.toString(), action);
+            removeCard(card.id, dir);
+            setHistory(prev => [...prev, card]);
+        }
         setSwipeDirection(null);
     }, 200);
   };
@@ -28,17 +89,12 @@ const Home: React.FC = () => {
   const handleManualSwipe = (direction: 'left' | 'right') => {
     if (cards.length === 0) return;
     const topCard = cards[0];
-    
-    // We can't easily trigger the drag animation from outside without ref complexity,
-    // so we'll just trigger the logic and let the card component unmount/animate out if possible,
-    // or just remove it. For a "tinder-like" button press, usually we pass a prop or ref.
-    // However, for simplicity here, we will just remove it. 
-    // A more advanced version would use an imperative handle on the SwipeCard.
     handleSwipe(topCard.id, direction);
   };
 
   const handleReset = () => {
-    setCards(haikuList);
+    const shuffled = [...haikuList].sort(() => Math.random() - 0.5);
+    setCards(shuffled);
     setHistory([]);
   };
 
@@ -51,12 +107,12 @@ const Home: React.FC = () => {
     >
       {/* Header */}
       <header className="flex items-center justify-between px-6 py-4 shrink-0 z-20">
-        <button className="p-2 rounded-full hover:bg-black/5 text-text-secondary transition-colors">
+        <button onClick={() => navigate('/stats')} className="p-2 rounded-full hover:bg-black/5 text-text-secondary transition-colors">
             <User size={24} />
         </button>
         <h1 className="text-xl font-bold tracking-tight text-primary-dark font-sans">Haiku</h1>
         <button 
-            onClick={() => navigate('/stats')}
+            onClick={() => navigate('/favorites')}
             className="p-2 rounded-full hover:bg-black/5 text-primary transition-colors"
         >
             <Heart size={24} fill="currentColor" className="opacity-100" />
@@ -98,7 +154,7 @@ const Home: React.FC = () => {
       </div>
 
       {/* Action Buttons */}
-      <div className="shrink-0 mb-8 px-6 flex items-center justify-center gap-6 z-20">
+      <div className="shrink-0 mb-8 px-6 flex items-center justify-center gap-6 z-20 relative">
         <button 
             onClick={() => handleManualSwipe('left')}
             disabled={cards.length === 0}
@@ -107,13 +163,22 @@ const Home: React.FC = () => {
             <X size={32} strokeWidth={2.5} />
         </button>
 
-        <button 
-            onClick={() => handleManualSwipe('right')}
-            disabled={cards.length === 0}
-            className="w-16 h-16 rounded-full bg-primary text-white shadow-lg shadow-primary/30 flex items-center justify-center hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-            <Heart size={32} fill="currentColor" strokeWidth={0} />
-        </button>
+        <div className="relative">
+          <button 
+              onClick={() => handleManualSwipe('right')}
+              disabled={cards.length === 0}
+              className="w-16 h-16 rounded-full bg-primary text-white shadow-lg shadow-primary/30 flex items-center justify-center hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+              <Heart size={32} fill="currentColor" strokeWidth={0} />
+          </button>
+          
+          {/* Floating Hearts Container */}
+          <div className="absolute bottom-0 left-0 w-full h-0 flex justify-center overflow-visible pointer-events-none">
+             {hearts.map((id) => (
+                <FloatingHeart key={id} id={id} onComplete={removeHeart} />
+             ))}
+          </div>
+        </div>
       </div>
     </motion.div>
   );
