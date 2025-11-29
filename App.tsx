@@ -20,7 +20,7 @@ const AnimatedRoutes = () => {
 
 const App: React.FC = () => {
   return (
-    <Router>
+    <Router basename={import.meta.env.BASE_URL}>
       <div className="w-full h-full min-h-screen bg-background text-text-primary font-sans antialiased">
         <AnimatedRoutes />
       </div>
