@@ -68,6 +68,7 @@ export const Home = () => {
                             key={haiku.id} 
                             haiku={haiku} 
                             isFront={isFront}
+                            swipeResult={isFront ? swipeDirection : null}
                             onSwipe={(dir) => handleSwipe(haiku.id, dir)}
                         />
                     );

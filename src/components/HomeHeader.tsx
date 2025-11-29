@@ -15,7 +15,7 @@ export const HomeHeader: React.FC = () => {
           onClick={() => navigate('/favorites')}
           className="p-2 rounded-full hover:bg-black/5 text-primary transition-colors"
       >
-          <Heart size={24} fill="currentColor" className="opacity-100" />
+          <Heart size={24} className="text-primary" />
       </button>
     </header>
   );

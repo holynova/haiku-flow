@@ -31,7 +31,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
         <button 
             onClick={onSwipeRight}
             disabled={disabled}
-            className="w-16 h-16 rounded-full bg-primary text-white shadow-lg shadow-primary/30 flex items-center justify-center hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-16 h-16 rounded-full bg-white text-red-500 shadow-lg shadow-red-500/20 flex items-center justify-center hover:bg-red-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
             <Heart size={32} fill="currentColor" strokeWidth={0} />
         </button>

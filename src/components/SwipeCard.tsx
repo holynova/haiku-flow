@@ -7,9 +7,10 @@ interface SwipeCardProps {
   haiku: Haiku;
   onSwipe: (direction: 'left' | 'right') => void;
   isFront: boolean;
+  swipeResult?: 'left' | 'right' | null;
 }
 
-const SwipeCard: React.FC<SwipeCardProps> = ({ haiku, onSwipe, isFront }) => {
+const SwipeCard: React.FC<SwipeCardProps> = ({ haiku, onSwipe, isFront, swipeResult }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const controls = useAnimation();
   const x = useMotionValue(0);
@@ -18,12 +19,12 @@ const SwipeCard: React.FC<SwipeCardProps> = ({ haiku, onSwipe, isFront }) => {
   // Rotation depends on X movement for natural feel
   const rotate = useTransform(x, [-200, 200], [-25, 25]);
   
+  // Background color turns gray on left swipe
+  const backgroundColor = useTransform(x, [-200, 0, 200], ["#9ca3af", "#ffffff", "#ffffff"]);
+  
   // Opacity indicators for Like/Nope overlays
   const likeOpacity = useTransform(x, [20, 150], [0, 1]);
   const nopeOpacity = useTransform(x, [-20, -150], [0, 1]);
-
-  // Determine card color tint based on swipe
-  const borderTint = useTransform(x, [-150, 0, 150], ["#FF6B6B", "transparent", "#3E946A"]);
 
   const handleDragEnd = async (event: any, info: PanInfo) => {
     const threshold = 100;
@@ -32,7 +33,7 @@ const SwipeCard: React.FC<SwipeCardProps> = ({ haiku, onSwipe, isFront }) => {
     if (info.offset.x > threshold || velocity > 500) {
       await controls.start({ x: 500, opacity: 0, transition: { duration: 0.2 } });
       onSwipe('right');
-    } else if (info.offset.x < -threshold || velocity < -500) {
+    } else if (info.offset.x < -50 || velocity < -500) {
       await controls.start({ x: -500, opacity: 0, transition: { duration: 0.2 } });
       onSwipe('left');
     } else {
@@ -43,10 +44,18 @@ const SwipeCard: React.FC<SwipeCardProps> = ({ haiku, onSwipe, isFront }) => {
   useEffect(() => {
     if (!isFront) {
         controls.set({ x: 0, opacity: 1, scale: 0.95, y: 10 });
+    } else if (swipeResult) {
+        // Handle manual swipe animation
+        const targetX = swipeResult === 'left' ? -500 : 500;
+        controls.start({ 
+            x: targetX, 
+            opacity: 0, 
+            transition: { duration: 0.2 } 
+        });
     } else {
-        controls.start({ scale: 1, y: 0, opacity: 1 });
+        controls.start({ scale: 1, y: 0, opacity: 1, x: 0 });
     }
-  }, [isFront, controls]);
+  }, [isFront, swipeResult, controls]);
 
 
   return (
@@ -71,8 +80,8 @@ const SwipeCard: React.FC<SwipeCardProps> = ({ haiku, onSwipe, isFront }) => {
       className="absolute inset-0 flex items-center justify-center"
     >
       <motion.div 
-        className="relative w-full h-full bg-white rounded-3xl shadow-card flex flex-col items-center justify-center p-8 text-center overflow-hidden border-4"
-        style={{ borderColor: isFront ? borderTint : 'transparent' }}
+        className="relative w-full h-full rounded-3xl shadow-card flex flex-col items-center justify-center p-8 text-center overflow-hidden border-4 border-transparent"
+        style={{ backgroundColor }}
       >
          {/* Like/Nope Overlays */}
         {isFront && (

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowLeft, ChevronRight, LayoutGrid, List, Bookmark, Trash2 } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useHaikuStats } from '../hooks/useHaikuStats';
 
@@ -67,17 +68,18 @@ export const Favorites = () => {
           </div>
         ) : viewMode === 'list' ? (
           <div className="space-y-3">
+            <AnimatePresence mode="popLayout">
             {likedHaikus.map((haiku) => (
-              <div 
+              <motion.div 
                 key={haiku.id}
-                className="bg-white p-4 rounded-xl flex items-center gap-4 shadow-sm border border-gray-100 active:scale-[0.99] transition-transform group relative"
+                className="bg-white p-4 rounded-xl flex items-center gap-4 shadow-sm border border-gray-100 active:scale-[0.99] transition-transform group relative overflow-hidden"
               >
                 <div className="w-10 h-10 rounded-full bg-[#E0F2D8] flex items-center justify-center shrink-0">
                   <Bookmark className="text-[#5F6F52] fill-[#5F6F52]" size={20} />
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-gray-800 font-serif font-medium truncate mb-1 text-lg">
-                    {haiku.japanese.split('\\n')[0]}
+                    {haiku.japanese.split('\n')[0]}
                   </p>
                   <p className="text-gray-500 text-xs">
                     — {haiku.author}
@@ -90,13 +92,15 @@ export const Favorites = () => {
                 >
                   <Trash2 size={18} />
                 </button>
-              </div>
+              </motion.div>
             ))}
+            </AnimatePresence>
           </div>
         ) : (
           <div className="grid grid-cols-2 gap-3">
+            <AnimatePresence mode="popLayout">
             {likedHaikus.map((haiku) => (
-              <div 
+              <motion.div 
                 key={haiku.id}
                 className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col aspect-square justify-between active:scale-[0.98] transition-transform relative group"
               >
@@ -120,8 +124,9 @@ export const Favorites = () => {
                 <p className="text-gray-400 text-xs text-center mt-2">
                   {haiku.author}
                 </p>
-              </div>
+              </motion.div>
             ))}
+            </AnimatePresence>
           </div>
         )}
       </div>
