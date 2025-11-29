@@ -4,61 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Haiku Flow</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              primary: "#3E946A",
-              "primary-dark": "#2E6F4F",
-              "primary-light": "#E2F3E7",
-              background: "#F6FCF8",
-              surface: "#FFFFFF",
-              "text-primary": "#1A2E24",
-              "text-secondary": "#5C766A",
-              danger: "#FF6B6B",
-              "danger-light": "#FFF0F0"
-            },
-            fontFamily: {
-              sans: ["Plus Jakarta Sans", "sans-serif"],
-              serif: ["Noto Serif JP", "serif"],
-            },
-            boxShadow: {
-              'card': '0 20px 40px -10px rgba(62, 148, 106, 0.15)',
-            }
-          },
-        },
-      }
-    </script>
-    <style>
-      body {
-        background-color: #F6FCF8;
-        -webkit-tap-highlight-color: transparent;
-      }
-      /* Hide scrollbar for cleaner UI */
-      ::-webkit-scrollbar {
-        width: 0px;
-        background: transparent;
-      }
-    </style>
-  <script type="importmap">
-{
-  "imports": {
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
-    "framer-motion": "https://aistudiocdn.com/framer-motion@^12.23.24",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.6"
-  }
-}
-</script>
-<link rel="stylesheet" href="/index.css">
-</head>
+  </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>

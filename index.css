@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+body {
+  background-color: #F6FCF8;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Hide scrollbar for cleaner UI */
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
