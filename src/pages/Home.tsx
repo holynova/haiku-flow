@@ -53,7 +53,7 @@ export const Home = () => {
       initial={{ opacity: 0 }} 
       animate={{ opacity: 1 }} 
       exit={{ opacity: 0 }}
-      className="flex flex-col h-screen w-full bg-background text-text-primary overflow-hidden relative"
+      className="flex flex-col h-full w-full bg-background text-text-primary overflow-hidden relative"
     >
       <HomeHeader />
 

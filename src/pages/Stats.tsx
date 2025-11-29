@@ -18,9 +18,9 @@ export const Stats = () => {
   const COLORS = ['#10B981', '#EF4444'];
 
   return (
-    <div className="flex flex-col h-screen bg-[#F8FAFC] overflow-hidden">
+    <div className="flex flex-col h-full bg-[#F8FAFC] overflow-hidden">
       {/* Header */}
-      <div className="shrink-0 pt-4 px-4 bg-[#F8FAFC] z-10">
+      <div className="shrink-0 pt-[max(1rem,env(safe-area-inset-top))] px-4 bg-[#F8FAFC] z-10">
         <div className="relative flex items-center justify-center mb-8 mt-2">
           <button 
             onClick={() => navigate(-1)}

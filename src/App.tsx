@@ -24,7 +24,7 @@ const App: React.FC = () => {
   
   return (
     <Router basename={basename}>
-      <div className="w-full h-full min-h-screen bg-background text-text-primary font-sans antialiased">
+      <div className="w-full h-dvh bg-background text-text-primary font-sans antialiased overflow-hidden">
         <AnimatedRoutes />
       </div>
     </Router>
