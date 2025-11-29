@@ -1,20 +1,36 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Haiku Flow
 
-# Run and deploy your AI Studio app
+**Haiku Flow** is a minimalist web application designed to help you discover and appreciate the beauty of Haiku poetry. With a Tinder-like swipe interface, you can easily browse through a curated collection of classic Haikus, save your favorites, and track your daily reading habits.
 
-This contains everything you need to run your app locally.
+**Haiku Flow** 是一个极简主义的 Web 应用程序，旨在帮助您发现和欣赏俳句之美。通过类似 Tinder 的滑动界面，您可以轻松浏览精选的经典俳句，收藏您喜爱的作品，并追踪您的每日阅读习惯。
 
-View your app in AI Studio: https://ai.studio/apps/drive/1vscM8_j25GzBhumHNIiuXTx3g-ITQQIg
+## Features / 功能
 
-## Run Locally
+-   **Swipe to Discover**: Swipe right to like, left to pass.
+    **滑动发现**: 右滑喜欢，左滑跳过。
+-   **Infinite Loop**: Never run out of poetry; cards recycle automatically.
+    **无限循环**: 诗歌永不枯竭，卡片自动循环。
+-   **Favorites Collection**: Review and manage your liked Haikus.
+    **收藏夹**: 回顾和管理您喜欢的俳句。
+-   **Reading Stats**: Track your daily streaks and total likes.
+    **阅读统计**: 追踪您的每日连续阅读和总点赞数。
 
-**Prerequisites:**  Node.js
+## Screenshots / 截图
 
+### Home Page / 首页
+The main interface for discovering Haikus.
+发现俳句的主界面。
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+![Home Page](./assets/home.png)
+
+### Statistics / 统计
+View your reading progress and habits.
+查看您的阅读进度和习惯。
+
+![Statistics](./assets/stats.png)
+
+### Favorites / 收藏
+Your personal collection of liked poems.
+您个人收藏的诗歌列表。
+
+![Favorites](./assets/favorates.png)
