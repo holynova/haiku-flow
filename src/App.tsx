@@ -19,8 +19,11 @@ const AnimatedRoutes = () => {
 };
 
 const App: React.FC = () => {
+  // Use explicit basename for GitHub Pages in production, otherwise use default
+  const basename = import.meta.env.PROD ? '/haiku-flow/' : '/';
+  
   return (
-    <Router basename={import.meta.env.BASE_URL}>
+    <Router basename={basename}>
       <div className="w-full h-full min-h-screen bg-background text-text-primary font-sans antialiased">
         <AnimatedRoutes />
       </div>
