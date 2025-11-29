@@ -21,16 +21,16 @@
 The main interface for discovering Haikus.
 发现俳句的主界面。
 
-![Home Page](./assets/home.png)
+<img src="./assets/home.png" width="300" alt="Home Page" />
 
 ### Statistics / 统计
 View your reading progress and habits.
 查看您的阅读进度和习惯。
 
-![Statistics](./assets/stats.png)
+<img src="./assets/stats.png" width="300" alt="Statistics" />
 
 ### Favorites / 收藏
 Your personal collection of liked poems.
 您个人收藏的诗歌列表。
 
-![Favorites](./assets/favorates.png)
+<img src="./assets/favorates.png" width="300" alt="Favorites" />
