@@ -1,5 +1,7 @@
 # Haiku Flow
 
+Cloudflare 在线地址：https://haiku-flow.xiaosang.cc/
+
 **Haiku Flow** is a minimalist web application designed to help you discover and appreciate the beauty of Haiku poetry. With a Tinder-like swipe interface, you can easily browse through a curated collection of classic Haikus, save your favorites, and track your daily reading habits.
 
 **Haiku Flow** 是一个极简主义的 Web 应用程序，旨在帮助您发现和欣赏俳句之美。通过类似 Tinder 的滑动界面，您可以轻松浏览精选的经典俳句，收藏您喜爱的作品，并追踪您的每日阅读习惯。
