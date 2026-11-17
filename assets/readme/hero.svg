@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="1200" height="360" viewBox="0 0 1200 360"
+     role="img" aria-labelledby="title desc">
+  <title id="title">Haiku Flow 俳句流动 — 像刷卡片一样读俳句</title>
+  <desc id="desc">淡绿禅意底标题：Haiku Flow，副标题像刷卡片一样读俳句；右侧是一张俳句卡片，写着芭蕉的古池名句，下方是跳过与喜欢两个圆按钮。</desc>
+
+  <rect width="1200" height="360" rx="26" fill="#eef6f0"/>
+
+  <g id="title-block" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif">
+    <text x="56" y="62" font-size="19" letter-spacing="3" fill="#2e7d5b">俳句发现 · HAIKU DISCOVERY</text>
+    <text x="56" y="128" font-size="62" font-weight="700" fill="#1d3a2d">Haiku Flow</text>
+    <text x="56" y="168" font-size="23" fill="#1d3a2d">俳句流动 — 像刷卡片一样读俳句</text>
+    <text x="56" y="204" font-size="19" fill="#4d6659">右滑喜欢，左滑跳过；410 首俳句无限循环。</text>
+    <g id="chips" font-size="18" fill="#1d3a2d" text-anchor="middle">
+      <g><rect x="56" y="238" width="118" height="36" rx="18" fill="#dcefe2" stroke="#c2ddc9" stroke-width="1.5"/><text x="115" y="262">410 首俳句</text></g>
+      <g><rect x="186" y="238" width="118" height="36" rx="18" fill="#dcefe2" stroke="#c2ddc9" stroke-width="1.5"/><text x="245" y="262">左右滑动</text></g>
+      <g><rect x="316" y="238" width="104" height="36" rx="18" fill="#dcefe2" stroke="#c2ddc9" stroke-width="1.5"/><text x="368" y="262">收藏夹</text></g>
+      <g><rect x="432" y="238" width="118" height="36" rx="18" fill="#dcefe2" stroke="#c2ddc9" stroke-width="1.5"/><text x="491" y="262">阅读统计</text></g>
+    </g>
+  </g>
+
+  <g id="swipe-card" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif">
+    <g id="card-back"><rect x="824" y="36" width="280" height="232" rx="20" fill="#d8e8dc" transform="rotate(4 964 152)"/></g>
+    <g id="card-front">
+      <rect x="800" y="48" width="280" height="232" rx="20" fill="#ffffff" stroke="#c2ddc9" stroke-width="1.5"/>
+      <text x="940" y="104" font-size="26" font-weight="600" fill="#1d3a2d" text-anchor="middle">古池や</text>
+      <text x="940" y="144" font-size="26" font-weight="600" fill="#1d3a2d" text-anchor="middle">蛙飛び込む</text>
+      <text x="940" y="184" font-size="26" font-weight="600" fill="#1d3a2d" text-anchor="middle">水の音</text>
+      <text x="940" y="228" font-size="18" fill="#4d6659" text-anchor="middle">— 松尾芭蕉</text>
+      <text x="940" y="258" font-size="16" fill="#4d6659" text-anchor="middle">SWIPE TO DECIDE</text>
+    </g>
+    <g id="swipe-arrows" font-size="22" fill="#2e7d5b" text-anchor="middle">
+      <text x="772" y="180">←</text>
+      <text x="1108" y="180">→</text>
+    </g>
+    <g id="action-btns">
+      <g><circle cx="880" cy="312" r="24" fill="#ffffff" stroke="#c2ddc9" stroke-width="1.5"/><text x="880" y="320" font-size="22" fill="#4d6659" text-anchor="middle">✕</text></g>
+      <g><circle cx="1000" cy="312" r="24" fill="#2e7d5b"/><rect x="982" y="298" width="36" height="28" fill="#2e7d5b"/><text x="1000" y="320" font-size="20" fill="#ffffff" text-anchor="middle">♥</text></g>
+    </g>
+  </g>
+</svg>
